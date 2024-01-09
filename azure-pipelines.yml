@@ -14,9 +14,9 @@ steps:
     versionSpec: '14.x'
   displayName: 'Install Node.js'
 
-
-- task: Npm@1
+- task: SnykSecurityScan@1
   inputs:
-    command: 'install'
-    verbose: true
-    customRegistry: 'useFeed'
+    serviceConnectionEndpoint: 'SnykUsedForPipelinePurposes1'
+    testType: 'app'
+    monitorWhen: 'always'
+    failOnIssues: false
