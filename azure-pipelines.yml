@@ -1,22 +1,17 @@
-# Node.js with NPM
-# Build a Node.js project using an available version of Node.js and NPM.
-# Add steps that run commands, set environment variables, and more. 
-# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 trigger:
-- main
+  - main # Or specify the branch you want to trigger the pipeline on
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: 'ubuntu-latest' # You can choose a different image if needed
 
 steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '14.x'
-  displayName: 'Install Node.js'
+  - script: echo 'Hello, world!' # Replace this with your build and test steps
 
-- task: SnykSecurityScan@1
-  inputs:
-    serviceConnectionEndpoint: 'SnykUsedForPipelinePurposes1'
-    testType: 'app'
-    monitorWhen: 'always'
-    failOnIssues: false
+  # You can add more steps for building your code, running tests, etc.
+  # ... previous steps ...
+
+  - script: |
+      npm install -g snyk
+      snyk auth login
+      snyk test --all-projects
+    displayName: 'Snyk Vulnerability Scan'
