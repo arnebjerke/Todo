@@ -10,7 +10,9 @@ steps:
   # You can add more steps for building your code, running tests, etc.
   # ... previous steps ...
 
-  - script: |
-      npm install -g snyk
-      snyk auth login
-    displayName: 'Snyk Vulnerability Scan'
+  - task: SnykSecurityScan@1
+    inputs:
+      serviceConnectionEndpoint: 'SnykUsedforPipelinePurposes'
+      testType: 'app'
+      monitorWhen: 'always'
+      failOnIssues: true
