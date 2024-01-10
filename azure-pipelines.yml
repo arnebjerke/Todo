@@ -12,4 +12,5 @@ steps:
 
   - script: |
       npm install -g snyk
+      snyk auth login
     displayName: 'Snyk Vulnerability Scan'
